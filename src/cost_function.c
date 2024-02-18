@@ -22,7 +22,7 @@
 #include "machine_learning.h"
 
 double cost_function(double **X, double *y, double *theta, int num_feat,
-		int num_train)
+		     int num_train)
 {
 	double *hx = calloc(num_train, sizeof(double));
 	double sum = 0.0L;
