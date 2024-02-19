@@ -16,6 +16,7 @@
  *
  */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include <math.h>
@@ -34,13 +35,15 @@ double cost_function(double **X, double *y, double *theta, int num_feat,
 			sum += theta[j] * X[i][j];
 		}
 		hx[i] = 1 / (1 + pow(M_E, -sum));
-		printf("%lf", hx[i]);
+		printf("%lf\n", hx[i]);
 	}
 
 	for (int i = 0; i < num_train; i++) {
 		sum += (y[i] * log(hx[i]) + (1 - y[i]) * log(1 - hx[i]));
 	}
 	double j_theta = -(sum / num_train);
+
+    printf("%lf\n", j_theta);
 
 	return j_theta;
 }

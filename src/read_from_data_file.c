@@ -44,7 +44,7 @@ data_t *read_from_data_file(char *file_name)
 
 	// Read the first line and split by ','
 	// Count the number of features via no. of splits
-	if (fgets(str, 200, fp) != NULL) {
+	if (fgets(str, 300, fp) != NULL) {
 		char *token = strtok(str, ",");
 		while (token != NULL) {
 			token = strtok(NULL, ",");
