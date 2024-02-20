@@ -14,9 +14,40 @@
 #include "machine_learning.h"
 
 double *gradient_descent(double **X, double *y, double *theta, float alpha,
-			 int num_train, int num_feat, int num_iters)
+			 int num_feat, int num_train, int num_iters)
 {
 	int i, j;
 
-	return 0;
+	double *h_x = calloc(num_train, sizeof(double));
+	double sum = 0.0L;
+
+	//  gradient descent
+	while (num_iters > 0) {
+		memset(h_x, 0.0L, num_train * sizeof(double));
+
+		// h(x) equation from MatLab
+		// hx = 1 ./ (1 + exp(-(theta' * X')));
+		for (i = 0; i < num_train; i++) {
+			for (int j = 0; j < num_feat; j++) {
+				sum += theta[j] * X[i][j];
+			}
+			h_x[i] = 1 / (1 + pow(M_E, -sum));
+		}
+
+		for (j = 0; j < num_feat; j++) {
+			sum = 0.0L;
+
+			for (i = 0; i < num_train; i++) {
+				sum += (h_x[i] - y[i]) * X[i][j];
+			}
+
+			theta[j] = theta[j] - (alpha * sum / (double)num_train);
+		}
+
+		num_iters--;
+	}
+
+	free(h_x);
+
+	return theta;
 }

@@ -24,4 +24,4 @@ double cost_function(double **X, double *y, double *theta, int num_train,
 		     int num_feat);
 
 double *gradient_descent(double **X, double *y, double *theta, float alpha,
-			 int num_train, int num_feat, int num_iters);
+			 int num_feat, int num_train, int num_iters);

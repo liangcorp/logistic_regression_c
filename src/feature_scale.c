@@ -19,65 +19,14 @@
 
 typedef struct {
 	double **X;
-	double *y;
+	int *y;
 	int num_train;
 	int num_feat;
 } data_t;
 
 typedef struct {
-	double *y;
-} normal_single_y;
-
-typedef struct {
 	double **X;
 } normal_multi_x;
-
-/*
-    Use mean normalization on 1D array.
-    This is used on Y that is a 1D array.
- */
-normal_single_y *mean_normal_y(double *y, int num_train)
-{
-	int i, j;
-
-	/* Set max and min for feature */
-	double max = y[0];
-	double min = y[0];
-
-	double mean = 0.0L;
-	double sum = 0.0L;
-
-	double *result_v = NULL;
-	normal_single_y *result = NULL;
-
-	/* Find max and min for feature */
-	for (i = 0; i < num_train; i++) {
-		if (max < y[i])
-			max = y[i];
-
-		if (min > y[i])
-			min = y[i];
-
-		sum += y[i];
-	}
-
-	mean = sum / num_train;
-
-	sum = 0.0L;
-
-	result_v = calloc(num_train, sizeof(double));
-
-	for (i = 0; i < num_train; i++) {
-		sum += (y[i] - mean) * (y[i] - mean);
-		result_v[i] = (y[i] - mean) / (max - min);
-	}
-
-	result = calloc(1, sizeof(normal_single_y));
-
-	result->y = result_v;
-
-	return result;
-}
 
 /*
     Use mean normalization on 2D array.
@@ -159,7 +108,7 @@ data_t *read_data_file(char *file_name)
 	char str[MAX_LINE_SIZE];
 
 	double **X = NULL; // features
-	double *y = NULL; // results
+	int *y = NULL; // results
 
 	int num_train = 0; // number of training set
 	int num_feat = 0; // number of features
@@ -188,7 +137,7 @@ data_t *read_data_file(char *file_name)
 	rewind(fp); // go back to top of the file
 
 	X = calloc(1, sizeof(double));
-	y = calloc(1, sizeof(double));
+	y = calloc(1, sizeof(int));
 
 	while (fgets(str, MAX_LINE_SIZE, fp) != NULL) {
 		// Find number of training set
@@ -209,7 +158,7 @@ data_t *read_data_file(char *file_name)
 
 		// Expend the memory size
 		X = realloc(X, (i + 1) * sizeof(double));
-		y = realloc(y, (i + 1) * sizeof(double));
+		y = realloc(y, (i + 1) * sizeof(int));
 	}
 
 	num_train = i; //  set the number of training sets
@@ -231,7 +180,7 @@ data_t *read_data_file(char *file_name)
 	return data_set;
 }
 
-int write_to_file(double **x, double *y, int num_train, int num_feat,
+int write_to_file(double **x, int *y, int num_train, int num_feat,
 		  char *filename)
 {
 	FILE *fptr = fopen(filename, "w");
@@ -245,7 +194,7 @@ int write_to_file(double **x, double *y, int num_train, int num_feat,
 			strcat(buffer, ",");
 			fprintf(fptr, "%s", buffer);
 		}
-		snprintf(buffer, sizeof(buffer), "%lf\n", y[i]);
+		snprintf(buffer, sizeof(buffer), "%d", y[i]);
 		strcat(buffer, "\n");
 		fprintf(fptr, "%s", buffer);
 	}
@@ -278,10 +227,7 @@ int main(int argc, char *argv[])
 	normal_multi_x *result_X = mean_normal_x(
 		data_set->X, data_set->num_train, data_set->num_feat);
 
-	normal_single_y *result_y =
-		mean_normal_y(data_set->y, data_set->num_train);
-
-	write_to_file(result_X->X, result_y->y, data_set->num_train,
+	write_to_file(result_X->X, data_set->y, data_set->num_train,
 		      data_set->num_feat, output_file);
 
 	for (int i = 0; i < data_set->num_train; i++) {
@@ -296,9 +242,6 @@ int main(int argc, char *argv[])
 
 	free(result_X->X);
 	free(result_X);
-
-	free(result_y->y);
-	free(result_y);
 
 #ifdef DEBUG
 	printf("Freed all memory\n");
