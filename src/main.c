@@ -59,14 +59,14 @@ int main(int argc, char *argv[])
 	theta[0] = 0.0;
 	theta[1] = 0.0;
 	theta[2] = 0.0;
-	printf("Thetas are [0.0, 0.0]. The cost is %lf\n",
-	       cost_function(X, y, theta, num_train, num_feat));
+	printf("Thetas are [0.0, 0.0, 0.0]. The cost is %lf\n",
+	       cost_function(X, y, theta, num_feat, num_train));
 
 	theta[0] = -1.0;
 	theta[1] = 2.0;
 	theta[2] = 3.0;
-	printf("Thetas are [-1.0, 2.0]. The cost is %lf\n",
-	       cost_function(X, y, theta, num_train, num_feat));
+	printf("Thetas are [-1.0, 2.0, 3.0]. The cost is %lf\n",
+	       cost_function(X, y, theta, num_feat, num_train));
 
 	// 	if (num_feat < 3)
 	// 		alpha = 0.01;

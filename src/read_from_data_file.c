@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+
 #include "machine_learning.h"
 
 // Function name is the same of the source code file name.
@@ -44,7 +45,7 @@ data_t *read_from_data_file(char *file_name)
 
 	// Read the first line and split by ','
 	// Count the number of features via no. of splits
-	if (fgets(str, 300, fp) != NULL) {
+	if (fgets(str, 400, fp) != NULL) {
 		char *token = strtok(str, ",");
 		while (token != NULL) {
 			token = strtok(NULL, ",");
@@ -58,7 +59,7 @@ data_t *read_from_data_file(char *file_name)
 
 	while (fgets(str, 200, fp) != NULL) {
 		// Find number of training set
-		X[i] = calloc((num_feat), sizeof(double));
+		X[i] = calloc(num_feat, sizeof(double));
 
 		X[i][0] = 1.0L;
 		X[i][1] = strtod(strtok(str, ","), NULL);
