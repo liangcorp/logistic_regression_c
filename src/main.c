@@ -58,13 +58,13 @@ int main(int argc, char *argv[])
 
 	theta[0] = 0.0;
 	theta[1] = 0.0;
-    theta[2] = 0.0;
+	theta[2] = 0.0;
 	printf("Thetas are [0.0, 0.0]. The cost is %lf\n",
 	       cost_function(X, y, theta, num_train, num_feat));
 
 	theta[0] = -1.0;
 	theta[1] = 2.0;
-    theta[2] = 3.0;
+	theta[2] = 3.0;
 	printf("Thetas are [-1.0, 2.0]. The cost is %lf\n",
 	       cost_function(X, y, theta, num_train, num_feat));
 
@@ -95,14 +95,6 @@ int main(int argc, char *argv[])
 	// 		printf("%lf ", final_theta[i]);
 	// 	}
 	// 	printf("]\n");
-
-	// double *final_theta_ne = normal_equation(X, y, num_train, num_feat);
-	// printf("Found thetas using Normal Equation: [");
-	//
-	// for (i = 0; i < num_feat; i++) {
-	// 	printf("%lf ", final_theta_ne[i]);
-	// }
-	// printf("]\n");
 
 	for (i = 0; i < num_train; i++) {
 		free(X[i]); // Free the inner pointers before outer pointers
