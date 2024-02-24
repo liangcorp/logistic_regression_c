@@ -28,6 +28,7 @@ double *gradient_descent(double **X, double *y, double *theta, float alpha,
 		// h(x) equation from MatLab
 		// hx = 1 ./ (1 + exp(-(theta' * X')));
 		for (i = 0; i < num_train; i++) {
+			sum = 0.0L;
 			for (int j = 0; j < num_feat; j++) {
 				sum += theta[j] * X[i][j];
 			}
@@ -48,6 +49,5 @@ double *gradient_descent(double **X, double *y, double *theta, float alpha,
 	}
 
 	free(h_x);
-
 	return theta;
 }
