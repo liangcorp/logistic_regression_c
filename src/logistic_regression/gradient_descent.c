@@ -18,8 +18,8 @@ double *gradient_descent(double **X, double *y, double *theta, float alpha,
 {
 	int i, j;
 
-	double *h_x = calloc(num_train, sizeof(double));
 	double sum = 0.0L;
+	double *h_x = calloc(num_train, sizeof(double));
 
 	//  gradient descent
 	while (num_iters > 0) {
@@ -29,7 +29,7 @@ double *gradient_descent(double **X, double *y, double *theta, float alpha,
 		// hx = 1 ./ (1 + exp(-(theta' * X')));
 		for (i = 0; i < num_train; i++) {
 			sum = 0.0L;
-			for (int j = 0; j < num_feat; j++) {
+			for (j = 0; j < num_feat; j++) {
 				sum += theta[j] * X[i][j];
 			}
 			h_x[i] = 1 / (1 + pow(M_E, -sum));
