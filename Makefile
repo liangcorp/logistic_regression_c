@@ -51,8 +51,8 @@ release:
 
 static:
 	mkdir -p bin
-	${CC} -fPIC ./src/read_from_data_file.c -I ./src/include/ ./src/logistic_regression/cost_function.c ./src/logistic_regression/gradient_descent.c ./src/main.c -lm -o ./bin/logistic_regression
-	${CC} -o ./bin/feature_scale -lm ./src/feature_scale.c
+	${CC} -g -fPIC ./src/read_from_data_file.c -I ./src/include/ ./src/logistic_regression/cost_function.c ./src/logistic_regression/gradient_descent.c ./src/main.c -lm -o ./bin/logistic_regression
+	${CC} -g -o ./bin/feature_scale -lm ./src/feature_scale.c
 
 	chmod +x ./bin/*
 
