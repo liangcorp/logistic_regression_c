@@ -10,6 +10,7 @@
  */
 
 #include <math.h>
+#include <stdlib.h>
 #include <string.h>
 #include "machine_learning.h"
 
