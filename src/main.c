@@ -17,7 +17,8 @@
 
 #include "machine_learning.h"
 
-const int ITERATIONS = 5000; // no of iterations
+// no of iterations
+const int ITERATIONS = 6500;
 
 int main(int argc, char *argv[])
 {
@@ -68,10 +69,10 @@ int main(int argc, char *argv[])
 	// printf("Thetas are [-1.0, 2.0, 3.0]. The cost is %lf\n",
 	//        cost_function(X, y, theta, num_feat, num_train));
 
-	if (num_feat < 3)
+	// if (num_feat < 3)
 		alpha = 0.01;
-	else
-		alpha = num_feat / 10.0;
+	// else
+	// 	alpha = num_feat / 10.0;
 
 #ifdef TIMER
 	clock_t gradient_descent_cpu_start =
@@ -90,6 +91,11 @@ int main(int argc, char *argv[])
 			 gradient_descent_cpu_start)) /
 		       CLOCKS_PER_SEC);
 #endif
+
+	printf("Number of training sets: %d\n", num_train);
+	printf("Number of features: %d\n", num_feat);
+	printf("Number of features: %f\n", alpha);
+	printf("Number of features: %d\n", ITERATIONS);
 
 	printf("Found thetas using Gradient Descent: [ ");
 

@@ -83,9 +83,6 @@ data_t *read_from_data_file(char *file_name)
 
 	num_train = i; //  set the number of training sets
 
-	printf("Number of training sets: %d\n", num_train);
-	printf("Number of features: %d\n", num_feat);
-
 	fclose(fp);
 	fp = NULL;
 

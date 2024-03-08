@@ -33,7 +33,7 @@ double *gradient_descent(double **X, double *y, double *theta, float alpha,
 			for (j = 0; j < num_feat; j++) {
 				sum += theta[j] * X[i][j];
 			}
-			h_x[i] = 1 / (1 + pow(M_E, -sum));
+			h_x[i] = pow(M_E, sum) / (1 + pow(M_E, sum));
 		}
 
 		for (j = 0; j < num_feat; j++) {
