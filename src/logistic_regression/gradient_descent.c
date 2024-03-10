@@ -14,7 +14,7 @@
 #include <string.h>
 #include "machine_learning.h"
 
-# define ZERO 0
+#define ZERO 0
 
 double *gradient_descent(double **X, double *y, double *theta, float alpha,
 			 int num_feat, int num_train, int num_iters)
