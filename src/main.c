@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 	//        cost_function(X, y, theta, num_feat, num_train));
 
 	// if (num_feat < 3)
-		alpha = 0.01;
+	alpha = 0.01;
 	// else
 	// 	alpha = num_feat / 10.0;
 
