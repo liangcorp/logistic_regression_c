@@ -57,3 +57,5 @@ compile_commands.json
 .vimspector.json
 tags
 *.swp
+**/.vscode/*
+launch.json
