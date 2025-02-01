@@ -19,7 +19,7 @@
 
 typedef struct {
 	double **X;
-	int *y;
+	double *y;
 	int num_train;
 	int num_feat;
 } data_t;
@@ -108,7 +108,7 @@ data_t *read_data_file(char *file_name)
 	char str[MAX_LINE_SIZE];
 
 	double **X = NULL; // features
-	int *y = NULL; // results
+	double *y = NULL; // results
 
 	int num_train = 0; // number of training set
 	int num_feat = 0; // number of features
@@ -180,7 +180,7 @@ data_t *read_data_file(char *file_name)
 	return data_set;
 }
 
-int write_to_file(double **x, int *y, int num_train, int num_feat,
+int write_to_file(double **x, double *y, int num_train, int num_feat,
 		  char *filename)
 {
 	FILE *fptr = fopen(filename, "w");
@@ -190,11 +190,11 @@ int write_to_file(double **x, int *y, int num_train, int num_feat,
 
 	for (int i = 0; i < num_train; i++) {
 		for (int j = 0; j < no_x_feat; j++) {
-			snprintf(buffer, sizeof(buffer), "%lf", x[i][j]);
+			snprintf(buffer, sizeof(buffer) + 1, "%lf", x[i][j]);
 			strcat(buffer, ",");
 			fprintf(fptr, "%s", buffer);
 		}
-		snprintf(buffer, sizeof(buffer), "%d", y[i]);
+		snprintf(buffer, sizeof(buffer) + 1, "%lf", y[i]);
 		strcat(buffer, "\n");
 		fprintf(fptr, "%s", buffer);
 	}
