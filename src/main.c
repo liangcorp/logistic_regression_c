@@ -94,8 +94,8 @@ int main(int argc, char *argv[])
 
 	printf("Number of training sets: %d\n", num_train);
 	printf("Number of features: %d\n", num_feat);
-	printf("Number of features: %f\n", alpha);
-	printf("Number of features: %d\n", ITERATIONS);
+	printf("Learning speed: %f\n", alpha);
+	printf("Number of iterations: %d\n", ITERATIONS);
 
 	printf("Found thetas using Gradient Descent: [ ");
 
