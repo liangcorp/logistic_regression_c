@@ -2,12 +2,12 @@ CC = gcc
 
 all:
 	mkdir -p bin lib
-	${CC} -Wall -g -fPIC ./src/read_from_data_file.c -I ./src/include/ -shared -o ./lib/libreaddata.so
-	${CC} -Wall -g -fPIC ./src/logistic_regression/cost_function.c -I ./src/include/ -shared -o ./lib/liblrcostfn.so
-	${CC} -Wall -g -fPIC ./src/logistic_regression/gradient_descent.c -I ./src/include/ -shared -o ./lib/liblrgrades.so
-	${CC} -Wall -g -o ./bin/feature_scale -lm ./src/feature_scale.c
-	${CC} -Wall -g -I ./lib/ -I ./src/include/ -c ./src/main.c -o ./lib/logistic_regression.o
-	${CC} -Wall -g -o ./bin/logistic_regression ./lib/logistic_regression.o -L ./lib/ -lm -l lrcostfn -l lrgrades -l readdata
+	${CC} -g -Wall -fPIC ./src/read_from_data_file.c -I ./src/include/ -shared -o ./lib/libreaddata.so
+	${CC} -g -Wall -fPIC ./src/logistic_regression/cost_function.c -I ./src/include/ -shared -o ./lib/liblrcostfn.so
+	${CC} -g -Wall -fPIC ./src/logistic_regression/gradient_descent.c -I ./src/include/ -shared -o ./lib/liblrgrades.so
+	${CC} -g -Wall -o ./bin/feature_scale -lm ./src/feature_scale.c
+	${CC} -g -Wall -I ./lib/ -I ./src/include/ -c ./src/main.c -o ./lib/logistic_regression.o
+	${CC} -g -Wall -o ./bin/logistic_regression ./lib/logistic_regression.o -L ./lib/ -lm -l lrcostfn -l lrgrades -l readdata
 
 	chmod +x ./bin/*
 
