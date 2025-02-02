@@ -59,3 +59,4 @@ tags
 *.swp
 **/.vscode/*
 launch.json
+tags
