@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 
     clock_t file_read_cpu_end = clock(); /* Final cpu time */
 
-    printf("File read in %lf seconds\n", ((double)(file_read_cpu_end - file_read_cpu_start)) / CLOCKS_PER_SEC);
+    printf("File read in %lf seconds\n",
+           ((double)(file_read_cpu_end - file_read_cpu_start)) / CLOCKS_PER_SEC);
 #endif
 
     X = data_set->X;
@@ -77,13 +78,15 @@ int main(int argc, char *argv[])
 #endif
     // *final_theta has the same value as *theta
     // no need to free
-    double *final_theta = gradient_descent(X, y, theta, alpha, num_feat, num_train, ITERATIONS);
+    double *final_theta =
+        gradient_descent(X, y, theta, alpha, num_feat, num_train, ITERATIONS);
 #ifdef TIMER
 
     clock_t gradient_descent_cpu_end = clock(); /* Final cpu time */
 
     printf("Gradient descent completed in %lf seconds\n",
-           ((double)(gradient_descent_cpu_end - gradient_descent_cpu_start)) / CLOCKS_PER_SEC);
+           ((double)(gradient_descent_cpu_end - gradient_descent_cpu_start)) /
+               CLOCKS_PER_SEC);
 #endif
 
     printf("Number of training sets: %d\n", num_train);
