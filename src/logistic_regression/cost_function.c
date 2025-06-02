@@ -16,10 +16,11 @@
  *
  */
 
-#include "machine_learning.h"
 #include <malloc.h>
 #include <math.h>
 #include <stdlib.h>
+
+#include "machine_learning.h"
 
 double cost_function(double **X, double *y, double *theta, int num_feat, int num_train)
 {

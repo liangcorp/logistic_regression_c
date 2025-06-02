@@ -9,10 +9,11 @@
  *
  */
 
-#include "machine_learning.h"
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "machine_learning.h"
 
 double *gradient_descent(double **X, double *y, double *theta, float alpha, int num_feat, int num_train, int num_iters)
 {
