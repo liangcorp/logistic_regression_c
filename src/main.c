@@ -9,10 +9,10 @@
  *
  */
 
+#include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
 #include <time.h>
 
 #include "machine_learning.h"
@@ -22,100 +22,96 @@ const int ITERATIONS = 6500;
 
 int main(int argc, char *argv[])
 {
-	data_t *data_set = NULL;
+    data_t *data_set = NULL;
 
-	int i;
+    int i;
 
-	unsigned int num_train = 0; // number of training set
-	unsigned int num_feat = 0; // number of features
+    unsigned int num_train = 0; // number of training set
+    unsigned int num_feat = 0;  // number of features
 
-	double **X = NULL; // features
-	double *y = NULL; // results
+    double **X = NULL; // features
+    double *y = NULL;  // results
 
-	float alpha = 0.0; // learning step size
-
-#ifdef TIMER
-	clock_t file_read_cpu_start = clock(); /* Initial processor time */
-#endif
-	// Get data set from data file
-	data_set = read_from_data_file(argv[1]);
-#ifdef TIMER
-
-	clock_t file_read_cpu_end = clock(); /* Final cpu time */
-
-	printf("File read in %lf seconds\n",
-	       ((double)(file_read_cpu_end - file_read_cpu_start)) /
-		       CLOCKS_PER_SEC);
-#endif
-
-	X = data_set->X;
-	y = data_set->y;
-	num_train = data_set->num_train;
-	num_feat = data_set->num_feat;
-
-	double *theta = calloc(num_feat, sizeof(double));
-
-	// printf("Cost function test...\n");
-	//
-	// theta[0] = 0.0;
-	// theta[1] = 0.0;
-	// theta[2] = 0.0;
-	// printf("Thetas are [0.0, 0.0, 0.0]. The cost is %lf\n",
-	//        cost_function(X, y, theta, num_feat, num_train));
-	//
-	// theta[0] = -1.0;
-	// theta[1] = 2.0;
-	// theta[2] = 3.0;
-	// printf("Thetas are [-1.0, 2.0, 3.0]. The cost is %lf\n",
-	//        cost_function(X, y, theta, num_feat, num_train));
-
-	// if (num_feat < 3)
-	alpha = 0.01;
-	// else
-	// 	alpha = num_feat / 10.0;
+    float alpha = 0.0; // learning step size
 
 #ifdef TIMER
-	clock_t gradient_descent_cpu_start =
-		clock(); /* Initial processor time */
+    clock_t file_read_cpu_start = clock(); /* Initial processor time */
 #endif
-	// *final_theta has the same value as *theta
-	// no need to free
-	double *final_theta = gradient_descent(X, y, theta, alpha, num_feat,
-					       num_train, ITERATIONS);
+    // Get data set from data file
+    data_set = read_from_data_file(argv[1]);
 #ifdef TIMER
 
-	clock_t gradient_descent_cpu_end = clock(); /* Final cpu time */
+    clock_t file_read_cpu_end = clock(); /* Final cpu time */
 
-	printf("Gradient descent completed in %lf seconds\n",
-	       ((double)(gradient_descent_cpu_end -
-			 gradient_descent_cpu_start)) /
-		       CLOCKS_PER_SEC);
+    printf("File read in %lf seconds\n", ((double)(file_read_cpu_end - file_read_cpu_start)) / CLOCKS_PER_SEC);
 #endif
 
-	printf("Number of training sets: %d\n", num_train);
-	printf("Number of features: %d\n", num_feat);
-	printf("Learning speed: %f\n", alpha);
-	printf("Number of iterations: %d\n", ITERATIONS);
+    X = data_set->X;
+    y = data_set->y;
+    num_train = data_set->num_train;
+    num_feat = data_set->num_feat;
 
-	printf("Found thetas using Gradient Descent: [ ");
+    double *theta = calloc(num_feat, sizeof(double));
 
-	for (i = 1; i < num_feat; i++) {
-		printf("%lf ", final_theta[i]);
-	}
-	printf("]\n");
+    // printf("Cost function test...\n");
+    //
+    // theta[0] = 0.0;
+    // theta[1] = 0.0;
+    // theta[2] = 0.0;
+    // printf("Thetas are [0.0, 0.0, 0.0]. The cost is %lf\n",
+    //        cost_function(X, y, theta, num_feat, num_train));
+    //
+    // theta[0] = -1.0;
+    // theta[1] = 2.0;
+    // theta[2] = 3.0;
+    // printf("Thetas are [-1.0, 2.0, 3.0]. The cost is %lf\n",
+    //        cost_function(X, y, theta, num_feat, num_train));
 
-	for (i = 0; i < num_train; i++) {
-		free(X[i]); // Free the inner pointers before outer pointers
-	}
+    // if (num_feat < 3)
+    alpha = 0.01;
+    // else
+    // 	alpha = num_feat / 10.0;
 
-	free(X);
-	free(y);
-	free(theta);
-	free(data_set);
+#ifdef TIMER
+    clock_t gradient_descent_cpu_start = clock(); /* Initial processor time */
+#endif
+    // *final_theta has the same value as *theta
+    // no need to free
+    double *final_theta = gradient_descent(X, y, theta, alpha, num_feat, num_train, ITERATIONS);
+#ifdef TIMER
+
+    clock_t gradient_descent_cpu_end = clock(); /* Final cpu time */
+
+    printf("Gradient descent completed in %lf seconds\n",
+           ((double)(gradient_descent_cpu_end - gradient_descent_cpu_start)) / CLOCKS_PER_SEC);
+#endif
+
+    printf("Number of training sets: %d\n", num_train);
+    printf("Number of features: %d\n", num_feat);
+    printf("Learning speed: %f\n", alpha);
+    printf("Number of iterations: %d\n", ITERATIONS);
+
+    printf("Found thetas using Gradient Descent: [ ");
+
+    for (i = 1; i < num_feat; i++)
+    {
+        printf("%lf ", final_theta[i]);
+    }
+    printf("]\n");
+
+    for (i = 0; i < num_train; i++)
+    {
+        free(X[i]); // Free the inner pointers before outer pointers
+    }
+
+    free(X);
+    free(y);
+    free(theta);
+    free(data_set);
 
 #ifdef DEBUG
-	printf("Freed all memory\n");
+    printf("Freed all memory\n");
 #endif
 
-	return 0;
+    return 0;
 }

@@ -11,17 +11,16 @@
 
 #include <malloc.h>
 
-typedef struct {
-	double **X;
-	double *y;
-	int num_train;
-	int num_feat;
+typedef struct
+{
+    double **X;
+    double *y;
+    int num_train;
+    int num_feat;
 } data_t;
 
 data_t *read_from_data_file(char *file_name);
 
-double cost_function(double **X, double *y, double *theta, int num_feat,
-		     int num_train);
+double cost_function(double **X, double *y, double *theta, int num_feat, int num_train);
 
-double *gradient_descent(double **X, double *y, double *theta, float alpha,
-			 int num_feat, int num_train, int num_iters);
+double *gradient_descent(double **X, double *y, double *theta, float alpha, int num_feat, int num_train, int num_iters);
