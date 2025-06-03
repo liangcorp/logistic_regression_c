@@ -1,7 +1,7 @@
 /**
  * @file sigmoid_function.c
  * @author Chen Liang
- * @brief Implementation of gradient descent in C
+ * @brief Implementation of sigmoid function in C
  * @version 0.1
  * @date 2024-06-14
  *
@@ -9,10 +9,7 @@
  *
  */
 
-#include <math.h>
-#include <string.h>
-
-#include "machine_learning.h"
+#include "sigmoid_function.h"
 
 void sigmoid_function(double *h_x, double **X, double *theta, int num_train, int num_feat)
 {

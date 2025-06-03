@@ -1,5 +1,7 @@
-/*
- *  Cost function for logistical regression
+/**
+ * @file gradient_descent.c
+ * @author Chen Liang
+ * @brief Cost function for logistical regression
  * # Cost function for multiple features (x\[1\], x\[2\], ..., x\[n\]
  * - X and y are the training sets.
  * - X is a 2D Vector represent multiple training sets
@@ -11,16 +13,17 @@
  *
  * J = sum(-y .* log(h_x') - (1 - y) .* log(1 - h_x')) /
  *         m + (lambda / (2 * m)) * sum(theta_without_first.^2);
+ * @date 2024-06-14
  *
- *
- *
+ * @copyright Copyright (c) 2024
+ * 
  */
 
-#include <malloc.h>
 #include <math.h>
 #include <stdlib.h>
 
 #include "machine_learning.h"
+#include "sigmoid_function.h"
 
 double cost_function(double **X, double *y, double *theta, int num_feat, int num_train)
 {

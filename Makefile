@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang
 
 all:
 	mkdir -p bin lib
@@ -13,12 +13,12 @@ all:
 
 debug:
 	mkdir -p bin lib
-	${CC} -Wall -Werror -Wpedantic -D DEBUG -g -fPIC ./src/read_from_data_file.c -I ./src/include/ -shared -o ./lib/libreaddata.so
-	${CC} -Wall -Werror -Wpedantic -D DEBUG -g -fPIC ./src/logistic_regression/sigmoid_function.c -fPIC ./src/logistic_regression/cost_function.c -I ./src/include/ -shared -o ./lib/liblrcostfn.so
-	${CC} -Wall -Werror -Wpedantic -D DEBUG -g -fPIC ./src/logistic_regression/sigmoid_function.c -fPIC ./src/logistic_regression/gradient_descent.c -lm -I ./src/include/ -shared -o ./lib/liblrgrades.so
-	${CC} -Wall -Werror -Wpedantic -D DEBUG -g -o ./bin/feature_scale -lm ./src/feature_scale.c
-	${CC} -Wall -Werror -Wpedantic -D DEBUG -g -I ./lib/ -I ./src/include/ -c ./src/main.c -o ./lib/logistic_regression.o
-	${CC} -Wall -Werror -Wpedantic -g -o ./bin/logistic_regression ./lib/logistic_regression.o -L ./lib/ -lm -l lrgrades -l lrcostfn -l readdata
+	${CC} -fsanitize=address -Wall -Werror -Wpedantic -D DEBUG -g -fPIC ./src/read_from_data_file.c -I ./src/include/ -shared -o ./lib/libreaddata.so
+	${CC} -fsanitize=address -Wall -Werror -Wpedantic -D DEBUG -g -fPIC ./src/logistic_regression/sigmoid_function.c -fPIC ./src/logistic_regression/cost_function.c -I ./src/include/ -shared -o ./lib/liblrcostfn.so
+	${CC} -fsanitize=address -Wall -Werror -Wpedantic -D DEBUG -g -fPIC ./src/logistic_regression/sigmoid_function.c -fPIC ./src/logistic_regression/gradient_descent.c -lm -I ./src/include/ -shared -o ./lib/liblrgrades.so
+	${CC} -fsanitize=address -Wall -Werror -Wpedantic -D DEBUG -g -o ./bin/feature_scale -lm ./src/feature_scale.c
+	${CC} -fsanitize=address -Wall -Werror -Wpedantic -D DEBUG -g -I ./lib/ -I ./src/include/ -c ./src/main.c -o ./lib/logistic_regression.o
+	${CC} -fsanitize=address -Wall -Werror -Wpedantic -g -o ./bin/logistic_regression ./lib/logistic_regression.o -L ./lib/ -lm -l lrgrades -l lrcostfn -l readdata
 
 	chmod +x ./bin/*
 
