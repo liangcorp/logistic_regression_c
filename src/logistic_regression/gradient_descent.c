@@ -26,19 +26,7 @@ double *gradient_descent(double **X, double *y, double *theta, float alpha, int 
     //  gradient descent
     while (num_iters > 0)
     {
-        memset(h_x, 0.0, num_train * sizeof(double));
-
-        // h(x) equation from MatLab
-        // hx = 1 ./ (1 + exp(-(theta' * X')));
-        for (i = 0; i < num_train; i++)
-        {
-            sum = 0.0L;
-            for (j = 0; j < num_feat; j++)
-            {
-                sum += theta[j] * X[i][j];
-            }
-            h_x[i] = pow(M_E, sum) / (1 + pow(M_E, sum));
-        }
+        sigmoid_function(h_x, X, theta, num_train, num_feat);
 
         for (j = 0; j < num_feat; j++)
         {

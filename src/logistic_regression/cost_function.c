@@ -7,9 +7,9 @@
  *
  * ## Implement the following matlab formula:
  *
- * hx = 1 ./ (1 + exp(-(theta' * X')));
+ * h_x = 1 ./ (1 + exp(-(theta' * X')));
  *
- * J = sum(-y .* log(hx') - (1 - y) .* log(1 - hx')) /
+ * J = sum(-y .* log(h_x') - (1 - y) .* log(1 - h_x')) /
  *         m + (lambda / (2 * m)) * sum(theta_without_first.^2);
  *
  *
@@ -24,28 +24,19 @@
 
 double cost_function(double **X, double *y, double *theta, int num_feat, int num_train)
 {
-    double *hx = calloc(num_train, sizeof(double));
+    double *h_x = calloc(num_train, sizeof(double));
     double sum = 0.0L;
 
-    // h(x) equation from MatLab
-    // hx = 1 ./ (1 + exp(-(theta' * X')));
-    for (int i = 0; i < num_train; i++)
-    {
-        for (int j = 0; j < num_feat; j++)
-        {
-            sum += theta[j] * X[i][j];
-        }
-        hx[i] = 1 / (1 + pow(M_E, -sum));
-    }
+    sigmoid_function(h_x, X, theta, num_train, num_feat);
 
     for (int i = 0; i < num_train; i++)
     {
-        sum += (y[i] * log(hx[i]) + (1 - y[i]) * log(1 - hx[i]));
+        sum += (y[i] * log(h_x[i]) + (1 - y[i]) * log(1 - h_x[i]));
     }
 
     double j_theta = -(sum / num_train);
 
-    free(hx);
+    free(h_x);
 
     return j_theta;
 }
