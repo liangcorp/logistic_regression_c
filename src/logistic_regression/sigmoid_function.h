@@ -12,4 +12,5 @@
 #include <math.h>
 #include <string.h>
 
-void sigmoid_function(double *h_x, double **X, double *theta, int num_train, int num_feat);
+void sigmoid_function(double *h_x, double **X, double *theta, int num_train,
+                      int num_feat);

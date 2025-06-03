@@ -16,7 +16,7 @@
  * @date 2024-06-14
  *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #include <math.h>
